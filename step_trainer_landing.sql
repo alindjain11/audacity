@@ -1,6 +1,6 @@
 CREATE EXTERNAL TABLE IF NOT EXISTS `stedi11`.`step_trainer_landing` (
   `sensorReadingTime` bigint,
-  `serialNumber` double,
+  `serialNumber` string,
   `distanceFromObject` bigint
 )
 ROW FORMAT SERDE 'org.openx.data.jsonserde.JsonSerDe'
