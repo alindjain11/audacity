@@ -7,34 +7,32 @@ Sparkify, is a music streaming startup have had a tremendous growth with respect
 
 As their data engineer, we are tasked with building an ETL pipeline that extracts their data from S3, stages them in Redshift, and transforms data into a set of dimensional tables for their analytics team to continue finding insights into what songs their users are listening to.
 
-<h3>2. Introduction</h3>
-
-
+<h3>Data</h3>
 
 
 We are going to be working with two datasets stored in S3. Here are the S3 links for each:
 
-Song data: s3://udacity-dend/song_data
-Log data: s3://udacity-dend/log_data
+Song data: `s3://udacity-dend/song_data`
+Log data: `s3://udacity-dend/log_data`
 To properly read log data s3://udacity-dend/log_data, we'll need the following metadata file:
 
-Log metadata: s3://udacity-dend/log_json_path.json
+Log metadata: `s3://udacity-dend/log_json_path.json`
 
 The files are partitioned by the first three letters of each song's track ID. For example, here are file paths to two files in this dataset.
 
-song_data/A/B/C/TRABCEI128F424C983.json
-song_data/A/A/B/TRAABJL12903CDCF1A.json
+`song_data/A/B/C/TRABCEI128F424C983.json
+song_data/A/A/B/TRAABJL12903CDCF1A.json`
 
-below is an example of what a single song file, TRAABJL12903CDCF1A.json, looks like.
+below is an example of what a single song file, `TRAABJL12903CDCF1A.json`, looks like.
 
-{"num_songs": 1, "artist_id": "ARJIE2Y1187B994AB7", "artist_latitude": null, "artist_longitude": null, "artist_location": "", "artist_name": "Line Renaud", "song_id": "SOUPIRU12A6D4FA1E1", "title": "Der Kleine Dompfaff", "duration": 152.92036, "year": 0}
+`{"num_songs": 1, "artist_id": "ARJIE2Y1187B994AB7", "artist_latitude": null, "artist_longitude": null, "artist_location": "", "artist_name": "Line Renaud", "song_id": "SOUPIRU12A6D4FA1E1", "title": "Der Kleine Dompfaff", "duration": 152.92036, "year": 0}`
 
 The log files in the dataset you'll be working with are partitioned by year and month. For example, here are file paths to two files in this dataset.
 
 log_data/2018/11/2018-11-12-events.json
 log_data/2018/11/2018-11-13-events.json
 
-
+<h3>Designing Tables</h3>
 Fact Table
 songplays - records in event data associated with song plays i.e. records with page NextSong
 songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent
@@ -48,3 +46,15 @@ artist_id, name, location, latitude, longitude
 time - timestamps of records in songplays broken down into specific units
 start_time, hour, day, week, month, year, weekday
 
+
+<h3>Scripts</h3>
+
+dwh.cfg is the Configuration file which has keys relating to RedShift Cluster, AWS keys, IAM Role, S3 paths
+
+<h4>Steps</h4>
+1. Creating and Managing tables 
+    Run 'create_tables.py' which drops any existing tables and creates tables according to defined Fact and Dimension Tables.
+    The sql statements can be found in sql_queries.py
+2. Loading and Transforming Data
+    Run 'etl.py' to load data from S3 to Redshift
+    The sql statements can be found in sql_queries.py
