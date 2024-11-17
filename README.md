@@ -46,7 +46,7 @@ artist_id, name, location, latitude, longitude
 time - timestamps of records in songplays broken down into specific units
 start_time, hour, day, week, month, year, weekday
 
-![ER Diagram!](https://github.com/alindjain11/audacity/blob/main/Untitled%20Diagram.drawio.png "ER Diagram")
+![ER Diagram!](https://github.com/alindjain11/audacity/blob/main/ER_Diagram.png "ER Diagram")
 <h3>4. Scripts</h3>
 
 dwh.cfg is the Configuration file which has keys relating to RedShift Cluster, AWS keys, IAM Role, S3 paths
